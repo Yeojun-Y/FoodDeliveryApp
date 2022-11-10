@@ -4,21 +4,19 @@ import {
   Keyboard,
   StyleProp,
   ViewStyle,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
-const DismissKeyboardView: React.FC<{style: StyleProp<ViewStyle>}> = ({
+const DismissKeyboardView: React.FC<{style?: StyleProp<ViewStyle>}> = ({
+  //style?의 ?는 ={props.style}>에 스타일이 들어있을수도안들어있을수도있다
+  //StyleProp<ViewStyle> 리액트 스타일의 타이핑
   children,
   ...props
 }) => (
   <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    <KeyboardAvoidingView
-      {...props}
-      style={props.style}
-      behavior={Platform.OS === 'android' ? undefined : 'padding'}>
+    <KeyboardAwareScrollView {...props} style={props.style}>
       {children}
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   </TouchableWithoutFeedback>
 );
 
