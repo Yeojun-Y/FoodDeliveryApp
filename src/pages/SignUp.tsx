@@ -10,9 +10,10 @@ import {
   View,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App';
+import {RootStackParamList} from '../../AppInner';
 import DismissKeyboardView from '../components/DismissKeyboardView';
 import axios, {AxiosError} from 'axios';
+import Config from 'react-native-config';
 
 type SignUpScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
@@ -63,9 +64,10 @@ function SignUp({navigation}: SignUpScreenProps) {
     console.log(email, name, password);
     try {
       setLoading(true);
+      console.log(Config.API_URL);
       //http method : get, put, patch, post, delete, head, options
       const response = await axios.post(
-        '/user',
+        `${Config.API_URL}/user`,
         {email, name, password},
         // {
         //   headers: {
@@ -76,17 +78,17 @@ function SignUp({navigation}: SignUpScreenProps) {
 
       console.log(response);
       Alert.alert('알림', '회원가입이 완료되었습니다.');
+      navigation.navigate('SignIn');
     } catch (error) {
       const errorResponse = (error as AxiosError<{message: string}>).response;
       console.error(errorResponse);
       if (errorResponse) {
         Alert.alert('알림', errorResponse.data.message);
+        setLoading(false);
       }
     } finally {
-      setLoading(false);
     }
-    Alert.alert('알림', '회원가입 되었습니다.');
-  }, [loading, email, name, password]);
+  }, [navigation, loading, email, name, password]);
 
   const canGoNext = email && name && password;
   return (
