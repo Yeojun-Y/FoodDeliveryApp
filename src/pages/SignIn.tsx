@@ -68,9 +68,9 @@ function SignIn({navigation}: SignInScreenProps) {
       const errorResponse = (error as AxiosError<{message: string}>).response;
       if (errorResponse) {
         Alert.alert('알림', errorResponse.data.message);
+        setLoading(false);
       }
     } finally {
-      setLoading(false);
     }
   }, [loading, dispatch, email, password]);
 
