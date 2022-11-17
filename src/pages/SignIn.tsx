@@ -136,7 +136,7 @@ function SignIn({navigation}: SignInScreenProps) {
           )}
         </Pressable>
         <Pressable onPress={toSignUp}>
-          <Text>회원가입하기</Text>
+          <Text style={styles.SignUpBtnText}>회원가입하기</Text>
         </Pressable>
       </View>
     </DismissKeyboardView>
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
+  SignUpBtnText: {},
 });
 
 export default SignIn;
