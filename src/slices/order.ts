@@ -46,10 +46,10 @@ const orderSlice = createSlice({
       if (index > -1) {
         state.orders.splice(index, 1); //orders에서는 삭제
       }
-      const deliveries = state.orders.findIndex(
+      const delivery = state.deliveries.findIndex(
         v => v.orderId === action.payload,
       );
-      if (deliveries > -1) {
+      if (delivery > -1) {
         state.deliveries.splice(index, 1); //orders에서는 삭제
       }
     },
