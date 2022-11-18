@@ -142,6 +142,7 @@ android {
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         resValue "string", "build_config_package", "com.forriders.fooddeliveryapp"
+        // multiDexEnabled true
 
         if (isNewArchitectureEnabled()) {
             // We configure the NDK build only if you decide to opt-in for the New Architecture.
@@ -263,8 +264,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'com.naver.maps:map-sdk:3.14.0'
+    // implementation 'com.naver.maps:map-sdk:3.16.0'
     //noinspection GradleDynamicVersion
+    implementation 'com.android.support:appcompat-v7:27.0.0'
+    implementation('com.naver.maps:map-sdk:3.16.0') {
+        exclude group: 'com.android.support'
+    }
+    implementation 'com.android.support:multidex:2.0.1'
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
