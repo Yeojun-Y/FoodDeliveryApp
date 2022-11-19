@@ -17,6 +17,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import userSlice from './src/slices/user';
 import {useAppDispatch} from './src/store';
 import orderSlice from './src/slices/order';
+import usePermissions from './src/hooks/usePermissions';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -37,6 +38,8 @@ function AppInner() {
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
   const [socket, disconnect] = useSocket();
   const dispatch = useAppDispatch();
+
+  usePermissions();
 
   useEffect(() => {
     axios.interceptors.response.use(

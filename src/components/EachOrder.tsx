@@ -16,6 +16,7 @@ import {LoggedInParamList} from '../../AppInner';
 import orderSlice, {Order} from '../slices/order';
 import {useAppDispatch} from '../store';
 import {RootState} from '../store/reducer';
+import getDistanceFromLatLonInKm from '../util';
 
 function EachOrder({item}: {item: Order}) {
   const dispatch = useAppDispatch();
@@ -60,6 +61,16 @@ function EachOrder({item}: {item: Order}) {
         <Text style={styles.eachInfo}>
           {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
         </Text>
+
+        <Text style={styles.eachInfo}>
+          {getDistanceFromLatLonInKm(
+            start.latitude,
+            start.longitude,
+            end.latitude,
+            end.longitude,
+          ).toFixed(1)}
+          km
+        </Text>
         <Text>동춘동</Text>
       </Pressable>
       {detail ? (
@@ -73,10 +84,10 @@ function EachOrder({item}: {item: Order}) {
             }}>
             <NaverMapView
               style={{width: '100%', height: '100%'}}
-              zoomControl={false}
+              zoomControl={true}
               center={{
                 zoom: 10,
-                tilt: 50,
+                // tilt: 50,
                 latitude: (start.latitude + end.latitude) / 2,
                 longitude: (start.longitude + end.longitude) / 2,
               }}>

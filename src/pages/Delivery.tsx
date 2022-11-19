@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 
 function Delivery() {
   return (
-    <Stack.Navigator initialRouteName="ing">
+    <Stack.Navigator initialRouteName="Ing">
       <Stack.Screen name="Ing" component={Ing} options={{headerShown: false}} />
       <Stack.Screen
         name="Complete"
